@@ -1,0 +1,68 @@
+---
+layout: post
+title:  “我的BLOG!”
+date:   2014-07-02 11:41:23
+categories: jekyll update
+---
+#Oracle数据库手动恢复备忘
+
+最近因为升级了Mac os x 10.10 Yosemite，突然前几天的一个晚上，开机发现就停留在开机界面了，看来BETA果然是不靠谱，然后想到自己这不前几天刚备份完吗，没事，TimeMachine是何等神器，二话不说直接恢复。但是恢复完，我后悔了，一来是忘了昨天晚上还加班呢，加班的成功保留成果所剩无几，关键我这才发现TimeMachine既然不备份虚拟机文件（虚拟机文件30G，估计直接给略过了吧），难怪每次都觉得备份那么快。
+
+不过后悔也没用，重新搭开发环境吧。操作系统WIN7->开发工具VS2012->数据库ORACLE。然后又到那无聊的数据库备份恢复的时间呢。由于我对oracle的数据库了解并不深，所以我并没有办法和牛B的DBA不看教程就能够全部手写数据库执行脚本，但是为了不让每一次都重新又回头找一次教程，这里深刻地做一次记录，下次备忘。
+
+这里，数据库主要恢复导出的dmp文件，具体涉及的一些相关指令如下
+
+<pre>
+<code>
+数据的导入 1 将D:\daochu.dmp 中的数据导入 TEST数据库中。   imp system/manager@TEST  file=d:\daochu.dmp full=y   imp system/manager@TEST  file=d:\daochu.dmp full=y ignore=y    上面可能有点问题，因为有的表已经存在，然后它就报错，对该表就不进行导入。在后面加上 ignore=y 就可以了。 2 将d:\daochu.dmp中的表table1 导入   imp system/manager@TEST  file=d:\daochu.dmp  tables=(table1) 3、从A用户导入B用户的表空间   imp system/manager@TEST  file=d:\daochu.dmp fromuser=jandardb touser=jandardb数据导出： 1 将数据库TEST完全导出,用户名system 密码manager 导出到D:\daochu.dmp中   exp system/manager@TEST file=d:\daochu.dmp full=y 2 将数据库中system用户与sys用户的表导出   exp system/manager@TEST file=d:\daochu.dmp owner=(system,sys) 3 将数据库中的表inner_notify、notify_staff_relat导出    exp aichannel/aichannel@TESTDB2 file= d:\data\newsmgnt.dmp tables=(inner_notify,notify_staff_relat)  4 将数据库中的表table1中的字段filed1以"00"打头的数据导出   exp system/manager@TEST file=d:\daochu.dmp tables=(table1) query=\" where filed1 like '00%'\"</code>
+</pre>
+
+具体过程一般如下：
+
+1. 建立对应的表空间。
+2. 建立对应的数据库用户，分配权限，表空间等。
+3. 使用导入指令导入数据。
+
+然后对应的执行过程操作步骤详解（以下所有操作都在SQLPLUS上操作）
+
+###建立表空间
+表空间含义(Table Space){copy from 百度百科}:
+
+> ORACLE数据库被划分成称作为表空间的逻辑区域——形成ORACLE数据库的逻辑结构。一个ORACLE数据库能够有一个或多个表空间,而一个表空间则对应着一个或多个物理的数据库文件。表空间是ORACLE数据库恢复的最小单位,容纳着许多数据库实体,如表、视图、索引、聚簇、回退段和临时段等。
+
+狭义的理解就是，数据库中可以有多个表空间，数据库的每一张表都属于某一个表空间，表空间是Oracle用来管理数据库的一种逻辑概念。
+
+<pre>
+<code>
+/*第1步：创建临时表空间  */create temporary tablespace 临时表空间名tempfile '存储地址\临时表空间存储文件名.DBF' size 50m  autoextend on  next 50m maxsize 20480m  extent management local;   /*第2步：创建数据表空间  */create tablespace 表空间名
+logging datafile '存储地址\表空间存储文件名.DBF'  size 50m  autoextend on  next 50m maxsize 20480m  extent management local;  
+</code>
+</pre>
+
+临时表空间
+>由于Oracle工作时经常需要一些临时的磁盘空间，这些空间主要用作查询时带有排序（Group by，Order by等）等算法所用，当用完后就立即释放，对记录在磁盘区的信息不再使用，因此叫临时表空间。
+
+###建立数据库用户
+<pre>
+<code>
+/*建立用户*/
+create user 用户名 identified by 密码  
+default tablespace 表空间  
+temporary tablespace 临时表空间;  
+
+/*分配权限,connect,resource,dba是角色名*/
+grant connect,resource,dba to 用户名;  
+</code>
+</pre>
+数据库的预定数据库角色简单说明:
+|角色名|简单说明|
+|::|::|
+|connect|具备最基本的数据库连接权限|
+|resource|具备能够创建表和触发器等一般管理权限|
+|dba|除了不具备关闭和重启数据库权限，具备大多数的系统管理权限，但是不具备像SYSDBA,SYSOPER的特权|
+
+###导入dmp备份数据
+
+	imp 用户名/密码@连接名称  file=路径/文件名.dmp full=y
+
+

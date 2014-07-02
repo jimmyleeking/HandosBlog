@@ -1,10 +1,69 @@
 ---
 layout: default
 ---
+   <style type="text/css">
 
+  body{
+    font-family: sans-serif;
+    white-space: nowrap;
+    padding: 10px;
+    height: 900px;
+        background: -webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff));
+        -webkit-background-origin: padding; 
+        -webkit-background-clip: content; 
+  }
+  a:link{text-decoration:none ; color:black ;}
+  a:visited {text-decoration:none ; color:black; ;}
+  a:hover {text-decoration:none; ; color:#7827f2 ;}
+  a:active {text-decoration:none ; color:#7827f2 ;}
+
+  
+  h1{
+
+    margin: auto;
+    
+    color: black;
+    font-size: xx-large;
+    
+  }
+  .divContent{
+    margin: auto;
+    width: 50%;
+    margin-top: 5%;
+  }
+  
+  .shine{
+
+    margin: auto;
+    width: 100%;
+    display: block;;
+    background:url("res/images/linkShine.png") -0px -235px no-repeat;
+    transition-property: all;
+    transition-duration: 2s;
+    overflow: hidden;
+    
+
+  }
+  .shine:hover {
+    background-position: 0px -110px;
+  }
+  .logo{
+    height: 120px;
+  }
+</style>
+<div class="divContent ">
+  <h1 >
+  This Is All About Jimmy Lee.
+  </h1>
+  
+  <div class="shine" >
+    <div class="logo"></div>
+    
+  </div>
+<div>
 <div class="home">
 
-  <h1>Posts</h1>
+  <h1>Post:</h1>
 
   <ul class="posts">
     {% for post in site.posts %}
@@ -18,3 +77,4 @@ layout: default
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
 </div>
+
