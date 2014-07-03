@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  “Oracle数据库手动恢复备忘”
+title:  "Oracle数据库手动恢复备忘"
 date:   2014-07-02 11:41:23
 categories: jekyll update
 ---
