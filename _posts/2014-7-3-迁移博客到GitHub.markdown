@@ -39,7 +39,7 @@ Free,免费是最能够带给中国人肾上腺素提升的一个名词，当然
 
 这里我简单说明一下，其实就只需要你在终端中输入指令:dig 你的用户名.github.io(MAC用户自带dig命令，windows为测试哦)
 然后会返回信息如下：
-![](/res/images/diginfo.png)
+![](/res/images/gitHubInfo.png)
 
 这一段信息就是你需要配置的DNS信息，然后在你DNS管理面板中配置，分别添加CNAME记录和A记录。
 
