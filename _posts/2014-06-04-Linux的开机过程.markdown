@@ -1,0 +1,35 @@
+---
+layout: post
+title:  "Linux的开机过程"
+date:   2014-06-04 15:28:23
+categories: Enviroment
+---
+Linux一直是我非常喜欢的一个开源操作系统，因为我热爱，所以我研究。
+
+加载BIOS的硬件信息，并获取第一个启动设备的代号。
+读取第一个启动设备的MBR的引导加载程序（即lilo、grub、spfdisk等）的启动信息。
+加载操作系统的核心信息，核心开始解压，并尝试驱动所有的硬件设备。
+核心执行init程序并获得运行信息。
+init执行/etc/rc.d/rc.sysinit文件。
+启动核心的外挂模块（/etc/modprobe.conf）。
+init执行运行的各个批处理文件（Script）
+init执行/etc/rc.d/rc.local文件。
+执行/bin/login程序，等待用户登录。
+登录之后开始以shell控制主机。
+<pre>
+<code>
+    public class MachineBoot{
+
+        public static void init(){
+            Bios bios=System.getBiosInfo();
+            Mbr mbr=System.getMbr(bios);
+            Kernel kernel=System.loadkernel(mbr);
+            kernel.init();
+            kernel.loadConfig();
+            kernel.loadLogin();
+            kernel.loadShell();
+        }
+        
+    }
+</code>
+</pre>

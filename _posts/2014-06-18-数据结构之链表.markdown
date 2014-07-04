@@ -1,0 +1,88 @@
+---
+layout: post
+title:  "数据结构之链表"
+date:   2014-06-18 15:28:23
+categories: Enviroment
+---
+
+链表是一种结构化的存储结构，链表和数组对比的优势在于他可以存储在不同的内存空间中，但是劣势也是很明显的，就是读取完整的链表需要多一些寻址操作，增加了一些性能的损耗。
+
+链表的结构实体
+<pre>
+<code>
+package edu.handos.interview.structure;
+
+/**
+ * Created by jimmylee on 6/18/14.
+ * 线性列表结构
+ */
+public class LinkedNode {
+    private String nodeName=null;
+    private LinkedNode next=null;
+
+    public String getNodeName() {
+        return nodeName;
+    }
+
+    public void setNodeName(String nodeName) {
+        this.nodeName = nodeName;
+    }
+
+
+
+    public LinkedNode getNext() {
+        return next;
+    }
+
+    public void setNext(LinkedNode next) {
+        this.next = next;
+    }
+
+    public LinkedNode(){
+
+    }
+
+}
+
+</code>
+</pre>
+
+简单的链表测试方法
+
+<pre>
+<code>
+  public void LinkNodeTestMain()
+    {
+        int maxNodeNumber=20;
+        /**
+         *
+         */
+        LinkedNode preNode=null;
+        LinkedNode firstNode=null;
+        for(int i=1;i<=maxNodeNumber;i++)
+        {
+            LinkedNode node=new LinkedNode();
+            node.setNodeName(String.format("I am Node %d",i));
+            if(preNode!=null)
+            {
+                preNode.setNext(node);
+                preNode=node;
+            }else
+            {
+                preNode=node;
+                firstNode=node;
+            }
+        }
+        LinkedNode tempNode=firstNode;
+
+        while (tempNode.getNext()!=null)
+        {
+            System.out.println(tempNode.getNodeName());
+            tempNode=tempNode.getNext();
+        }
+        System.out.println(tempNode.getNodeName());
+
+
+    }
+</code>
+</pre>
