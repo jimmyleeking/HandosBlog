@@ -1,0 +1,62 @@
+---
+layout: post
+title:  "Mac工具介绍"
+date:   2014-07-18 23:50:23
+categories: Thinking
+---
+基本说，每一年我都会换一台电脑，我从台式机到笔记本，从Windows本到Linux，再到Mac,因为热爱Mac产品，又通过Mac的布道者池老师的介绍，找到自己对于OS系统的认定的最终归属，可以说，我最喜欢，使用最为习惯的还是Mac，无论是系统的默认字体，还是一些操作逻辑，我都非常喜欢Mac带给我的便捷。
+
+可能因为爱折腾的原因，加上自己工作的原因，我基本每一年都要换一台经常使用的电脑，这次从沉重的pro切换到air，虽然用大部分软件都迁移过来了，但是我发现以前配置好的一些有力的便捷工具，竟然没有同步过来，唉唉，指令又生疏了，好吧，让我们重新练习总结一下吧。
+
+##Gem 
+
+Gem是一个针对ruby应用仓库的工具，ruby是一个非常好的应用程序组织工具，在开发工具中我们通常会用到一些ruby的一些工具，可以通过gem来方便下载对应的库(工具)。
+
+####解决国内无法使用gem的问题
+
+一般来说，mac自带了gem工具了，但是由于国内上网环境问题，在国内无法正常使用gem来，没有翻墙工具的童鞋最好将仓库指向淘宝友谊提供的镜像仓库，具体操作方法：
+<pre>
+<code>
+$ gem sources --remove https://rubygems.org/
+$ gem sources -a https://ruby.taobao.org/
+$ gem sources -l
+
+</code>
+</pre>
+
+##Home Brew
+相当于unbuntu下的apt工具，是一个软件包仓库工具。
+
+####安装
+
+在终端直接运行
+<pre>
+<code>
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+</code>
+</pre>
+
+####使用
+
+对于homebrew,你只需要知道一个指令就够了
+<pre>
+<code>
+brew install -p
+</code>
+</pre>
+
+##jekyll
+
+老实说，这不是每一个人都需要，因为这个在Github搭建博客的一个重要工具，感兴趣的话可以问问谷歌大神。
+
+####安装
+
+<pre>
+<code>
+gem install jekyll
+</code>
+</pre>
+
+####使用
+
+可以参考:[http://jekyllrb.com](http://jekyllrb.com)
