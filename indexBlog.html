@@ -1,0 +1,38 @@
+---
+layout: default
+---
+   <style type="text/css">
+
+  a:link{text-decoration:none ; color:black ;}
+  a:visited {text-decoration:none ; color:black; ;}
+  a:hover {text-decoration:none; ; color:#7827f2 ;}
+  a:active {text-decoration:none ; color:#7827f2 ;}
+
+  
+  h1{
+
+    margin: auto;
+    
+    color: black;
+    font-size: xx-large;
+    
+  }
+  .waterFall { width: 180px;height: 180px; padding: 10px; border: 1px solid #CCCCCC; text-align: center; box-shadow: 0 0 5px rgba(0,0,0,0.5); background: #ffffff;}
+</style>
+<!-- HOME -->
+<div class="home">
+
+  <h1>随笔:</h1>
+
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+
+</div>

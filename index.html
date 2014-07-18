@@ -1,44 +1,63 @@
 ---
-layout: default
+layout: firstPage
 ---
-   <style type="text/css">
+  <header>
+    <div class="cen">
+      <a class="logo">laoli</a>
+      <nav>
+        <ul>
+          <li><a href="">首页</a></li>
+          <li><a href="indexBlog/">Lee随笔</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="main">
+    <div class="cen">
+      <h2 class="title">Hello<span>Mr.Lee</span></h2>
+      <p class="text">摄影，写作，编程，热爱生活，我是Jimmy Lee,很高兴认识你。</p>
 
-  a:link{text-decoration:none ; color:black ;}
-  a:visited {text-decoration:none ; color:black; ;}
-  a:hover {text-decoration:none; ; color:#7827f2 ;}
-  a:active {text-decoration:none ; color:#7827f2 ;}
+      
+      <ul id="list">
+        <li>
+          <a href="https://github.com/jimmyleeking"><img src="res/images/EasyFrameWorkLogo.png"></a>
+          
+        </li>
+        <li>
+          <a href="indexBlog/"><img src="res/images/aboutMeSmall.jpg"></a>
+          <div class="mask">
+          </div>
+          <div class="mask_content">
+            <h4 >个人博客</h4>
+            <p>技术，思想，追求</p>
+           
+          </div>
+        </li>
+        
 
-  
-  h1{
 
-    margin: auto;
-    
-    color: black;
-    font-size: xx-large;
-    
-  }
-  .waterFall { width: 180px;height: 180px; padding: 10px; border: 1px solid #CCCCCC; text-align: center; box-shadow: 0 0 5px rgba(0,0,0,0.5); background: #ffffff;}
-</style>
-<!-- HOME -->
-<div class="home">
+      </ul>
 
-  <h1>随笔:</h1>
+      <div class="main_bottom">
+        <ul class="main_nav fleft">
+          <li><a href="#">全部</a></li>
+          <li><a href="about/">关于我</a></li>
+          
+          <li><a href="#">我的作品</a></li>
+        </ul>
+        <p class="page fright">
+          1 / <span>3</span>
+          <a href="#" class="prev"></a>
+          <a href="#" class="next"></a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="cen">
+      Copyright &copy; 20013 - 2014 Handos.info　All Rights Reserved
+    </div>
+  </footer>
 
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
-<!-- Product List -->
-<div>
-<h1>作品:</h1>
-<div class="waterFall">
-<img src="res/images/EasyFrameWorkLogo.png" />
-</div>
-
-</div>
 
