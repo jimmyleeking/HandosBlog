@@ -90,7 +90,9 @@ NameSpace.ClassName.MethodName
 
 * 如果你的方法不是静态的，那么你还需要新建一个类，新建一个类的方式同样在刚才的Assembly弹出页面中，点击添加页面。
 
-![](/res/biimg类名为，实例名为，那么我的调用方式应该为：
+![](/res/biimg/nonstaticmethod.png)
+
+类名为TestSSRS.Robot，实例名为robotInstance，那么我的调用方式应该为：
 
 <pre>
 <code>
