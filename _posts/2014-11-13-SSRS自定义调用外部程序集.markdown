@@ -1,0 +1,127 @@
+---
+layout: post
+title:  "SSRS -自定义调用外部程序集(C#版本)"
+date:   2014-11-13 21:33:23
+categories: BI
+---
+
+
+##前言
+
+最近做一个简单的报表项目，需要对参数进行加密。在SSRS 2008的版本上，微软是支持调用外部程序集(只要基于.NET Framework编写的程序都可以调用)，但是网络上和官网都只提供了.VB版本的调用，让人以为只能够使用VB语言编写，后来细细看了文档说明和实践了一下，其实是支持C#语言编写的外部程序集。具体过程操作过程，这里详细描述一下。
+
+##SSRS自定义程序集
+
+微软对于报表在调用外部程序集有着严格的限制，首先必须对其进行强名称签名，然后还需要将需要导入的包放置于特定的目录下。如果这两点做得没有错误，基本能够顺利调用外部程序编写的方法。下面我以调用一个简单的加1方法来说明具体过程。
+
+###创建外部程序集
+
+* 打开Visual Studio，创建一个新的类库项目，然后命名为TestSSRS。
+
+![](/res/biimg/createProject.png)
+
+* 确保你的项目使用的是.NET Framework 2.0（如果你使用SSRS 2008则可支持.NET3.5及其以下版本），以保证最大的兼容性。
+* 在项目中新建一个类，命名为Age.class，其代码如下：
+
+<pre>
+<code>
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+namespace TestSSRS
+{
+    public class Robot
+    {
+        public static String SayHello()
+        {
+            return "Hello!";
+        }
+        public String SayGoodBye()
+        {
+            return "Good Bye.";
+        }
+    }
+}
+
+</code></pre>
+
+* 外部程序集必须以GAC形式进行部署，才能够被调用，因此必须对其设置强名称签名。我们首先右击项目解决方案需，选择属性。
+* 跳转到“签名”页面，赋予一个签名，如果没有可以选择创建一个新的签名，创建方法可以根据提示步骤一步一步下去。
+
+![](/res/biimg/addSign.png)
+
+* 为了允许报表服务引擎能够调用你的代码，你必须还必须对程序集赋予一个可被调用属性。这里我们打开项目->Properties->AssemblyInfo.cs,进行相关配置
+
+![](/res/biimg/addAttribute2.png)
+
+* 新增一个程序集属性AllowPartiallyTrustedCallers。
+* 新增命名空间System.Security。
+
+![添加属性](/res/biimg/addAttribute.png)
+
+* 最后，对着项目选中重新生成项目。生成之后，我们可以到解决方案对应的bin目录下，找到我们的生成文件。
+* 因为我的生成模式为DEBUG，所以我到\bin\Debug\目录下，找到AgeAssembly.ddl，然后复制到报表服务器的Bin目录下，我这里的参考目录为："C:\Program Files\Microsoft SQL Server\MSRS10_50.MSSQLSERVER\Reporting Services\ReportServer\bin"。同时，将文件也复制到系统程序集目录下：“C:\Windows\assembly”，系统将为认为该程序集可信。
+
+###调用外部程序集
+
+* 在你需要调用到外部程序集的报表项目中，在其报表属性中，选择Assembly，会弹出一个对话框。
+
+![](/res/biimg/reportProperties.png)
+
+* 选择引用,然后单击添加，选择我们刚才生成的DLL文件(放置于..\ReportServer\bin下的)。这样这张报表就可以调用我们外部程序集的方法了。
+
+![](/res/biimg/addAssemble.png)
+
+具体调用的规则如下，以C#为例：
+<pre>
+<code>
+命名空间.类名.静态方法名<br>
+NameSpace.ClassName.MethodName
+</code>
+</pre>
+
+举本章的例子，我们调用我们开发的静态方法，其表达式为：
+<pre>
+<code>
+=TestSSRS.Robot.SayHello()
+</code>
+</pre>
+
+* 如果你的方法不是静态的，那么你还需要新建一个类，新建一个类的方式同样在刚才的Assembly弹出页面中，点击添加页面。
+
+![](/res/biimg类名为，实例名为，那么我的调用方式应该为：
+
+<pre>
+<code>
+Code.实例名.方法名
+Code.InstanceName.MethodName
+</code>
+</pre>
+
+所以这里我调用的方法为：
+
+<pre>
+<code>
+=Code.robotInstance.SayGoodBye()
+</code>
+</pre>
+
+##相关问题
+
+####在所有步骤都确定正确的时候，预览界面还是显示错误，无法调用自定义方法?
+
+在SSRS2008的BIDS预览并不完善，支持对部分方法的调用，但是有时候会仍会出错，只需要“运行”或者“部署”程序中应该没有问题。如果仍然调用有问题，请再仔细检查一下自己的配置或者相关步骤。
+
+
+>参考资料<br>
+>
+>* 关于外部程序集的引用<br>
+>http://technet.microsoft.com/zh-cn/magazine/ms154507(SQL.105).aspx <br>
+>
+>* ReportingService本地报表引用自定义程序集需要注意的问题
+>http://www.cnblogs.com/chriskwok/archive/2009/02/06/1385228.html
+
+
+
+
