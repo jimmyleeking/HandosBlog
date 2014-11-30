@@ -20,6 +20,7 @@
    * [Linux](operatingsystem/linux.md)
        * [常用终端指令](develoopertools/unixliketerminal.md)
            * [ln](develoopertools/ln.md)
+   * [MacOS](operatingsystem/macos.md)
 * [开发方向](developmentdirection/README.md)
    * [BI](developmentdirection/bi.md)
    * [虚拟现实](developmentdirection/3d.md)
