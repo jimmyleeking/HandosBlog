@@ -9,7 +9,7 @@
 * git log 查看提交日志
 * git remote
 * git checkout 不带版本控制信息的检出
-* git tag -v 
+* git tag -v
 
 
 

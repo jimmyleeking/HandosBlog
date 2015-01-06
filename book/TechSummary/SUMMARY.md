@@ -23,6 +23,7 @@
    * [MacOS](operatingsystem/macos.md)
 * [开发方向](developmentdirection/README.md)
    * [BI](developmentdirection/bi.md)
+       * [业务建模指导](developmentdirection/bimodeldesign.md)
    * [虚拟现实](developmentdirection/3d.md)
    * [移动应用](developmentdirection/mobileapp.md)
 * [附录](appendix/README.md)
