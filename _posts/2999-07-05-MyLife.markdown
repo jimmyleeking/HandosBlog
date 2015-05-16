@@ -1,0 +1,18 @@
+---
+layout: post
+title:  "My Life"
+date:   2999-07-05 09:09:09
+categories: My Life
+---
+
+
+##关于我
+
+* [我的信仰与我的家庭](http://www.handos.cc/thinking/2013/12/11/我的信仰与我的家庭/)
+* [Movie Movie For China](http://handos.cc/thinking/2014/03/01/MovieMovieForChina/)
+* [旅行的意义](http://handos.cc/enviroment/2014/04/01/旅行的意义/)
+
+##技术思考
+
+* [拥抱变化的API：总线设计思想以及通过接口来暴露实现类](http://handos.cc/api/2015/04/14/API_BUS_INTERFACE/)
+* [关于Socket编程的简单研究](http://handos.cc/java/2015/05/11/Java_Socket_Program/)
