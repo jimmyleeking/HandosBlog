@@ -16,3 +16,7 @@ categories: My Life
 
 * [拥抱变化的API：总线设计思想以及通过接口来暴露实现类](http://handos.cc/api/2015/04/14/API_BUS_INTERFACE/)
 * [关于Socket编程的简单研究](http://handos.cc/java/2015/05/11/Java_Socket_Program/)
+
+
+##技术边角
+* [迁移博客到GitHub](http://handos.cc/enviroment/2014/07/03/迁移博客到GitHub)
