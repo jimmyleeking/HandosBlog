@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Five ways to dream come true"
+title:  "Five Ways To Dream Come True"
 date:   2015-06-10 01:53:23
 categories: English
 ---
