@@ -1,6 +1,8 @@
 HandosBlog
 ==========
 
-这是我的个人博客，主要以技术文章为主，但是也会有个人对社会的一些看法的总结。
-如果你也喜欢我的博客，请关注他吧: http://www.handos.info
-如果你对我的文章感兴趣的话，请联系l02n20l@qq.com
+This is my blog,  I am an software engineer. 
+
+my website:http://www.handos.cc
+
+contact me : l02n20l@qq.com
